@@ -16,6 +16,9 @@ class Solution {
             }
         }
 
-        return Arrays.copyOf(intervals, idx + 1);
+        return Arrays.copyOf(intervals, idx + 1);//as idx starts at zero based indexing and size is 1 based
+        /*Arrays.copyOf(array, newLength)
+
+Second parameter = length of new array, not last index.*/
     }
 }
