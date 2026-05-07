@@ -3,6 +3,7 @@ class Solution {
         if(n==1){
             return 0;
         }
+        //consider it as a tree  for like every 0 two chile 01 and 1 as paret with two chils 1 and 0
         int parent=kthGrammar(n-1,(k+1)/2);
         if(k%2==1){
             return parent;
