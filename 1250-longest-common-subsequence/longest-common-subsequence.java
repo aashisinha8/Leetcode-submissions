@@ -8,70 +8,33 @@ class Solution {
         int m = text2.length();
 
         int[][] dp =
-            new int[n][m];
+                new int[n + 1][m + 1];
 
-        for(int[] row : dp)
-            Arrays.fill(row,-1);
+        for(int i = 1; i <= n; i++) {
 
-        return solve(
-            0,
-            0,
-            text1,
-            text2,
-            dp
-        );
-    }
+            for(int j = 1; j <= m; j++) {
 
-    private int solve(
-            int i,
-            int j,
-            String s1,
-            String s2,
-            int[][] dp) {
+                if(text1.charAt(i - 1)
+                        ==
+                   text2.charAt(j - 1)) {
 
-        if(i == s1.length()
-            ||
-           j == s2.length())
-            return 0;
+                    dp[i][j]
+                        =
+                        1 +
+                        dp[i - 1][j - 1];
+                }
+                else {
 
-        if(dp[i][j] != -1)
-            return dp[i][j];
-
-        if(s1.charAt(i)
-            ==
-           s2.charAt(j)) {
-
-            return dp[i][j]
-                =
-                1 +
-                solve(
-                    i+1,
-                    j+1,
-                    s1,
-                    s2,
-                    dp
-                );
+                    dp[i][j]
+                        =
+                        Math.max(
+                            dp[i - 1][j],
+                            dp[i][j - 1]
+                        );
+                }
+            }
         }
 
-        return dp[i][j]
-            =
-            Math.max(
-
-                solve(
-                    i+1,
-                    j,
-                    s1,
-                    s2,
-                    dp
-                ),
-
-                solve(
-                    i,
-                    j+1,
-                    s1,
-                    s2,
-                    dp
-                )
-            );
+        return dp[n][m];
     }
 }
