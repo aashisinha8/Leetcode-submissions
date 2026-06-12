@@ -4,13 +4,10 @@ class Solution {
         return lcs(s,reverse(s));
     }
     private String reverse(String s){
-        StringBuilder sb=new StringBuilder();
-        char[] arr=s.toCharArray();
-        for(int i=arr.length-1;i>=0;i--){
-           sb.append(arr[i]);
-        }
-        return sb.toString();
-    }
+    return new StringBuilder(s)
+            .reverse()
+            .toString();
+}
     private int lcs(String text1,String text2 ){
         int n = text1.length();
         int m = text2.length();
