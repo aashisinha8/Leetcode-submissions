@@ -34,7 +34,7 @@ class Solution {
             return false;
 
         char temp = board[row][col];
-        board[row][col] = '#';
+        board[row][col] = '#';//Marking as '#' prevents revisiting the same cell in the current path
 
         boolean found =
                 dfs(board, word, row + 1, col, index + 1) ||
