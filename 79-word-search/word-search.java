@@ -42,7 +42,7 @@ class Solution {
                 dfs(board, word, row, col + 1, index + 1) ||
                 dfs(board, word, row, col - 1, index + 1);
 
-        board[row][col] = temp;
+        board[row][col] = temp;//restore to original after exploring
 
         return found;
     }
