@@ -1,30 +1,35 @@
 class Solution {
+
     public int numDistinct(String s, String t) {
-         int[][] dp = new int[s.length()][t.length()];
-         for (int[] row : dp)
-         Arrays.fill(row, -1);
-        return solve(dp,0, 0, s, t);
-    }
 
-    private int solve(int[][] dp, int i, int j, String s, String t) {
+        int n = s.length();
+        int m = t.length();
 
-        if (j == t.length())
-            return 1;
+        int[] next = new int[m + 1];
 
-        if (i == s.length())
-            return 0;
+        next[m] = 1;
 
-        if (dp[i][j] != -1)
-            return dp[i][j];
+        for (int i = n - 1; i >= 0; i--) {
 
-        if (s.charAt(i) == t.charAt(j)) {
-            dp[i][j] = solve(dp,i + 1, j + 1, s, t)
-                     + solve(dp,i + 1, j, s, t);
-        } else {
-            dp[i][j] = solve(dp,i + 1, j, s, t);
+            int[] curr = new int[m + 1];
+
+            curr[m] = 1;
+
+            for (int j = m - 1; j >= 0; j--) {
+
+                if (s.charAt(i) == t.charAt(j)) {
+
+                    curr[j] = next[j + 1] + next[j];
+
+                } else {
+
+                    curr[j] = next[j];
+                }
+            }
+
+            next = curr;
         }
 
-        return dp[i][j];
+        return next[0];
     }
 }
-    
