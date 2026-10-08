@@ -3,15 +3,15 @@ class Solution {
         int n=s.length();
         int[] dp=new int[n];
         Arrays.fill(dp,-1);
-        return solve(0,s,dp)-1;
+        return pieces(0,s,dp)-1;
     }
-    private int solve(int i,String s, int[] dp){
+    private int pieces(int i,String s, int[] dp){
         if(i==s.length()) return 0;
         if(dp[i]!=-1) return dp[i];
         int minCuts=Integer.MAX_VALUE;
         for(int j=i;j<=s.length()-1;j++){
             if(isPalindrome(s,i,j)){
-                int cuts=1+solve(j+1,s,dp);
+                int cuts=1+pieces(j+1,s,dp);
                 minCuts=Math.min(minCuts,cuts);
             }
         }
