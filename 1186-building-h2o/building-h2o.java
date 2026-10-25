@@ -6,10 +6,10 @@ class H2O {
     private final Semaphore hydrogen = new Semaphore(2);
     private final Semaphore oxygen = new Semaphore(1);
 
-    private final CyclicBarrier barrier = new CyclicBarrier(3);
+    private final CyclicBarrier barrier1 = new CyclicBarrier(3);
+    private final CyclicBarrier barrier2 = new CyclicBarrier(3);
 
     public H2O() {
-        // Code here
     }
 
     public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
@@ -17,11 +17,11 @@ class H2O {
         hydrogen.acquire();
 
         try {
-            barrier.await();
+            barrier1.await();
 
             releaseHydrogen.run();
 
-            barrier.await();
+            barrier2.await();
 
         } catch (BrokenBarrierException e) {
             Thread.currentThread().interrupt();
@@ -35,11 +35,11 @@ class H2O {
         oxygen.acquire();
 
         try {
-            barrier.await();
+            barrier1.await();
 
             releaseOxygen.run();
 
-            barrier.await();
+            barrier2.await();
 
         } catch (BrokenBarrierException e) {
             Thread.currentThread().interrupt();
@@ -48,3 +48,4 @@ class H2O {
         }
     }
 }
+
